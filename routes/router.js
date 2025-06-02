@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
+const operacaoController = require('../controllers/operacao-controller')
+
+
 /* ----- funções de roteamento ----- */
 router.get('/', function (req, res) {
   res.render('pages/home',
@@ -24,9 +27,14 @@ router.get('/operacoes', function (req, res) {
   res.render('pages/operacoes',
     {
       title: 'Operações',
-      paginaAtiva: 'operacao'
+      paginaAtiva: 'operacao',
+      operacoes: [] // Passa a lista de operações para a view
     }
   );
 })
+
+
+router.post('/salvar_operacao', operacaoController.save)
+
 
 module.exports = router
